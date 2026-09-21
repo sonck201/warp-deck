@@ -1,7 +1,8 @@
 {
-  "name": "decky-plugin-template",
+  "name": "warp-deck",
+  "label": "WarpDeck",
   "version": "0.0.1",
-  "description": "A template to quickly create decky plugins from scratch, based on TypeScript and webpack",
+  "description": "Install, manage, and toggle Cloudflare 1.1.1.1 WARP VPN in SteamOS Game Mode.",
   "type": "module",
   "scripts": {
     "build": "rollup -c",
@@ -27,7 +28,7 @@
   "homepage": "https://github.com/SteamDeckHomebrew/decky-plugin-template#readme",
   "devDependencies": {
     "@decky/rollup": "^1.0.2",
-    "@decky/ui": "^4.11.0",
+    "@decky/ui": "^4.12.1",
     "@rollup/rollup-linux-x64-musl": "^4.53.3",
     "@types/react": "19.1.1",
     "@types/react-dom": "19.1.1",
@@ -47,5 +48,6 @@
         "react-dom"
       ]
     }
-  }
+  },
+  "packageManager": "yarn@4.18.0"
 }
