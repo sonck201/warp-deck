@@ -1,11 +1,11 @@
 {
-  "name": "Example Plugin",
-  "author": "John Doe",
-  "flags": ["debug", "_root"],
+  "name": "WarpDeck",
+  "author": "sonb",
+  "flags": ["debug", "root"],
   "api_version": 1,
   "publish": {
     "tags": ["template", "root"],
-    "description": "Decky example plugin.",
+    "description": "Install, manage, and toggle Cloudflare 1.1.1.1 WARP VPN in SteamOS Game Mode.",
     "image": "https://opengraph.githubassets.com/1/SteamDeckHomebrew/PluginLoader"
   }
 }

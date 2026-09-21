@@ -1,33 +1,17 @@
 #!/usr/bin/env bash
-PNPM_INSTALLED="$(which pnpm)"
+YARN_INSTALLED="$(which yarn)"
 DOCKER_INSTALLED="$(which docker)"
 CLI_INSTALLED="$(pwd)/cli/decky"
 
-# echo "$PNPM_INSTALLED"
+# echo "$YARN_INSTALLED"
 # echo "$DOCKER_INSTALLED"
 # echo "$CLI_INSTALLED"
 
 echo "If you are using alpine linux, do not expect any support."
-if [[ "$PNPM_INSTALLED" =~ "which" ]]; then
-    echo "pnpm is not currently installed, you can install it via your distro's package managment system or via a script that will attempt to do a manual install based on your system. If you wish to proceed with installing via the script then answer "no" (capitals do not matter) and proceed with the rest of the script. Otherwise, just hit enter to proceed and use the script."
-    read run_pnpm_script
-    if [[ "$run_pnpm_script" =~ "n" ]]; then
-        echo "You have chose to install pnpm via npm or your distros package manager. Please make sure to do so before attempting to build your plugin."
-    else
-        CURL_INSTALLED="$(which curl)"
-        WGET_INSTALLED="$(which wget)"
-        if [[ "$CURL_INSTALLED" =~ "which" ]]; then
-            printf "curl not found, attempting with wget.\n"
-            if [[ "$WGET_INSTALLED" =~ "which" ]]; then
-                printf "wget not found, please install wget or curl.\n"
-                printf "Could not install pnpm as curl and wget were not found.\n"
-            else
-                wget -qO- https://get.pnpm.io/install.sh | sh -
-            fi
-        else
-            curl -fsSL https://get.pnpm.io/install.sh | sh -
-        fi
-    fi
+if [[ "$YARN_INSTALLED" =~ "which" ]]; then
+    echo "yarn not found. This repo pins yarn@4.18.0 via the packageManager field,"
+    echo "which Corepack reads automatically. Enable it once with: corepack enable"
+    echo "(Corepack ships with Node.js 16.10+; you may need sudo.)"
 fi
 
 if [[ "$DOCKER_INSTALLED" =~ "which" ]]; then
