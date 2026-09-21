@@ -22,7 +22,8 @@ coverage
 # Dependency directory
 node_modules
 bower_components
-.pnpm-store
+.yarn/cache
+.yarn/install-state.gz
 
 # Editors
 .idea

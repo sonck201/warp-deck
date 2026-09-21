@@ -1,6 +1,6 @@
 {
   "name": "WarpDeck",
-  "author": "John Doe",
+  "author": "sonb",
   "flags": ["debug", "root"],
   "api_version": 1,
   "publish": {

@@ -15,23 +15,23 @@
             // },
             "problemMatcher": []
         },
-        //pnpm setup task to grab all needed modules
+        //yarn setup task to grab all needed modules
         {
-            "label": "pnpmsetup",
+            "label": "yarnsetup",
             "type": "shell",
             "group": "none",
-            "detail": "Setup pnpm",
-            "command": "which pnpm && pnpm i",
+            "detail": "Setup yarn",
+            "command": "corepack enable && yarn install --immutable",
             "problemMatcher": []
         },
         //Preliminary "All-in-one" setup task
         {
             "label": "setup",
-            "detail": "Set up depedencies, pnpm and update Decky Frontend Library.",
+            "detail": "Set up depedencies, yarn and update Decky Frontend Library.",
             "dependsOrder": "sequence",
             "dependsOn": [
                 "depsetup",
-                "pnpmsetup",
+                "yarnsetup",
                 "updatefrontendlib"
             ],
             "problemMatcher": []
@@ -126,7 +126,7 @@
             "type": "shell",
             "group": "build",
             "detail": "Update @decky/ui aka DFL",
-            "command": "pnpm update @decky/ui --latest",
+            "command": "yarn up @decky/ui@latest",
             "problemMatcher": []
         },
         //Used chmod plugins folder to allow copy-over of files

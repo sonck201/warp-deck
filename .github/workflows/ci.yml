@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: corepack enable
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - run: yarn install --immutable
+      - run: yarn build
+
+      # Everything below only runs for a published release.
+
+      - name: Stamp version from tag
+        if: github.event_name == 'release'
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          jq --arg v "$VERSION" '.version = $v' package.json > package.json.tmp
+          mv package.json.tmp package.json
+
+      - name: Assemble plugin
+        if: github.event_name == 'release'
+        run: |
+          mkdir -p pkg/WarpDeck/dist
+          cp dist/index.js pkg/WarpDeck/dist/
+          cp -r main.py package.json plugin.json py_modules README.md LICENSE pkg/WarpDeck/
+          # defaults/ contents are hoisted into the plugin root, not kept as a folder
+          cp -r defaults/. pkg/WarpDeck/
+          rm -f pkg/WarpDeck/defaults.txt  # template placeholder, not a plugin file
+          (cd pkg && zip -qr "../WarpDeck-${GITHUB_REF_NAME}.zip" WarpDeck)
+
+      - name: Attach zip to release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" "WarpDeck-${GITHUB_REF_NAME}.zip" --clobber

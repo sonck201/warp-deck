@@ -24,7 +24,7 @@ warp-deck/
 ## 📋 Prerequisites & Tools
 
 ### On Your Development PC:
-- **Node.js**: v18+ and `npm` or `pnpm`
+- **Node.js**: v18+ with Corepack enabled (`corepack enable`) for `yarn` 4
 - **IDE**: VS Code (recommended) or any modern editor
 - **Git**
 - **SSH Client**: To connect to your Steam Deck over local network
@@ -32,7 +32,7 @@ warp-deck/
 ### On Your Steam Deck:
 - **Developer Mode**: Enabled (`Settings > System > Enable Developer Mode`)
 - **Decky Loader**: Installed (`release` or `prerelease`)
-- **SSH Enabled**: 
+- **SSH Enabled**:
   ```bash
   sudo systemctl enable --now sshd
   ```
