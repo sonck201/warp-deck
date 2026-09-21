@@ -19,8 +19,8 @@ if [ -f "$DECK_KEY" ]; then SSH_OPTS="$SSH_OPTS -i $DECK_KEY -o IdentitiesOnly=y
 SSH="ssh -t $SSH_OPTS $DECK_USER@$DECK_HOST"
 DEST="homebrew/plugins/$PLUGIN_DIR"
 
-# decky owns the plugins dir (and our last deploy) as root; hand it back for the rsync
-$SSH "sudo mkdir -p ~/$DEST && sudo chown -R $DECK_USER: ~/homebrew/plugins ~/$DEST"
+# wipe the old install (decky owns it as root) and hand the fresh dir to us for the rsync
+$SSH "sudo rm -rf ~/homebrew/plugins/${PLUGIN_DIR:?} && sudo mkdir -p ~/$DEST && sudo chown -R $DECK_USER: ~/homebrew/plugins ~/$DEST"
 
 rsync -az --delete -e "ssh $SSH_OPTS" \
   dist main.py package.json plugin.json py_modules defaults README.md LICENSE \
